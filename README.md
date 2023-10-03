@@ -1,5 +1,3 @@
-# theClapper-Mobile
-
 # Input task
 <img src="https://github.com/AndrewOch/theClapper-Mobile/assets/38253789/c6a97c43-67d2-4ebc-81b2-3c4c7c89280e" width="400">
 
