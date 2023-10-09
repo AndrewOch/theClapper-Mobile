@@ -1,23 +1,49 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
+import { NavigationContainer, useNavigation } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 import {
   StyleSheet,
   Text,
   View,
-  FlatList,
-  Platform,
   ScrollView,
-  Switch,
   Button,
-  TouchableWithoutFeedback,
   TextInput,
   TouchableHighlight,
 } from "react-native";
 
-const fontStyles = ["normal", "italic"];
+const Stack = createNativeStackNavigator();
 
 const App = () => {
-  return <BoxForm />;
+  return (
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen name={'Home'} component={HomeScreen} />
+        <Stack.Screen name={'About'} component={AboutScreen} />
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+};
+
+export const HomeScreen = ( ) => {
+  const navigation = useNavigation();
+  return (
+    <View style={styles.container}>
+      <Text>Home Screen</Text>
+      <Button title="About" onPress={() => navigation.navigate("About")} />
+    </View>
+  );
+};
+
+export const AboutScreen = (  ) => {
+  const navigation = useNavigation();
+  return (
+    <View style={styles.container}>
+      <Text>About Screen</Text>
+      <Button title="Back" onPress={() => navigation.goBack()} />
+    </View>
+  );
 };
 
 export const InputTask = () => {
@@ -26,7 +52,7 @@ export const InputTask = () => {
 
   const handlePress = () => {
     if (name) {
-      setShowName(name)
+      setShowName(name);
     }
   };
 
@@ -91,8 +117,8 @@ export const AuthForm = () => {
 
 export const BoxForm = () => {
   const [boxes, setBoxes] = useState([]);
-  const [size, setSize] = useState('');
-  const [borderRadius, setborderRadius] = useState('');
+  const [size, setSize] = useState("");
+  const [borderRadius, setborderRadius] = useState("");
   const [alignSelf, setAlignSelf] = useState("center");
   const [color, setColor] = useState("");
 
@@ -101,7 +127,7 @@ export const BoxForm = () => {
       size: parseInt(size),
       borderRadius: parseInt(borderRadius),
       alignSelf: alignSelf,
-      color: color
+      color: color,
     };
     setBoxes([...boxes, newBox]);
   };
