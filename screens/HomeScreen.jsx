@@ -12,8 +12,7 @@ export const HomeScreen = () => {
     const navigation = useNavigation();
     return (
       <View style={styles.container}>
-        <Text>Home Screen</Text>
-        <Button title="About" onPress={() => navigation.navigate("About")} />
+        <Button title="Открыть список задач" onPress={() => navigation.navigate("Todo List")} />
       </View>
     );
   };

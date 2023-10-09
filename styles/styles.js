@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet } from "react-native";
 
 export default StyleSheet.create({
   body: {
@@ -12,6 +12,14 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     padding: 16,
+    backgroundColor: "#ddd",
+    width: "100%",
+    gap: 20,
+  },
+  content: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "#ddd",
     width: "100%",
     gap: 20,
@@ -32,4 +40,9 @@ export default StyleSheet.create({
     marginHorizontal: 20,
     borderRadius: 5,
   },
+  actionBar: {
+    display: "flex",
+    flexDirection: "row",
+    gap: 30
+  }
 });
