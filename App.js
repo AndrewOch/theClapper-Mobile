@@ -17,6 +17,12 @@ const Stack = createNativeStackNavigator();
 
 const App = () => {
   return (
+    <NavigationComponent/>
+  );
+};
+
+export const NavigationComponent = ( ) => {
+  return (
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name={'Home'} component={HomeScreen} />
