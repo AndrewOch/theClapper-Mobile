@@ -1,25 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import { NavigationContainer, useNavigation } from "@react-navigation/native";
-import React, { useState } from "react";
-import { useRoute } from '@react-navigation/native';
+import React from "react";
 
-import {
-  Button,
-  Text,
-  View,
-  TextInput,
-  FlatList,
-  SafeAreaView,
-} from "react-native";
-import TodoItem from "../components/TodoItem";
+import { View, FlatList, SafeAreaView } from "react-native";
+import CheckedTodoItem from "../components/CheckedTodoItem";
 import styles from "../styles/styles";
 import todoStyles from "../styles/todo";
 
-export default function CompletedTodoListScreen() {
-  const navigation = useNavigation();
-  const route = useRoute();
-  const { data } = route.params;
-
+export default function CheckedTodoListScreen({ route }) {
   const keyExtractor = (index) => {
     return index.toString();
   };
@@ -29,17 +16,9 @@ export default function CompletedTodoListScreen() {
       <View style={styles.content}>
         <FlatList
           style={todoStyles.flatList}
-          data={data}
+          data={route.params.data}
           keyExtractor={(item, index) => keyExtractor(index)}
-          renderItem={({ item, index }) => (
-            <Text>{item.text}</Text>
-            // <TodoItem
-            //   item={item}
-            //   removeItem={removeItem}
-            //   toggleItem={toggleItem}
-            //   index={index}
-            // />
-          )}
+          renderItem={({ item, index }) => <CheckedTodoItem item={item} />}
         />
         <StatusBar style="auto" />
       </View>

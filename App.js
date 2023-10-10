@@ -8,7 +8,7 @@ import { BoxForm } from "./tasks/BoxForm";
 import { HomeScreen } from "./screens/HomeScreen";
 import { AboutScreen } from "./screens/AboutScreen";
 import TodoListScreen from "./screens/TodoListScreen";
-import CompletedTodoListScreen from "./screens/CompletedTodoList";
+import CheckedTodoListScreen from "./screens/CompletedTodoList";
 
 const Stack = createNativeStackNavigator();
 
@@ -20,10 +20,10 @@ export const NavigationComponent = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name={"Home"} component={HomeScreen} />
+        <Stack.Screen name={"Home"} tit component={HomeScreen} />
         <Stack.Screen name={"Todo List"} component={TodoListScreen} />
         <Stack.Screen name={"About"} component={AboutScreen} />
-        <Stack.Screen name={"Completed"} component={CompletedTodoListScreen} />
+        <Stack.Screen name={"Completed"} component={CheckedTodoListScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
