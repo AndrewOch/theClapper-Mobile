@@ -8,4 +8,7 @@
 # Homework 2
 [Navigation](https://github.com/AndrewOch/theClapper-Mobile/assets/38253789/eb07ca19-2724-44d3-802c-1ef2f920e0af)
 
+# Homework 3
+https://github.com/AndrewOch/theClapper-Mobile/assets/38253789/512e21bc-bdff-4096-b298-2565d998457a
+
 
