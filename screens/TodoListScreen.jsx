@@ -5,28 +5,25 @@ import { Button, View, TextInput, FlatList, SafeAreaView } from "react-native";
 import TodoItem from "../components/TodoItem";
 import styles from "../styles/styles";
 import todoStyles from "../styles/todo";
+import todoStore from "../stores/TodoStore";
+import logStore from "../stores/LogStore";
 
 export default function TodoListScreen() {
   const navigation = useNavigation();
-  const [todos, setTodos] = useState([]);
   const [text, setText] = useState("");
 
   const addItem = () => {
-    setTodos([...todos, { text: text, checked: false }]);
-    setText("");
-  };
-
-  const toggleItem = (index) => {
-    let newTodos = [...todos];
-    newTodos[index].checked = !newTodos[index].checked;
-    setTodos(newTodos);
-  };
+    todoStore.addItem(text);
+    setText('');
+  }
 
   const removeItem = (index) => {
-    let newTodos = [...todos];
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
-  };
+    todoStore.removeItem(index);
+  }
+
+  const toggleItem = (index) => {
+    todoStore.toggleItem(index);
+  }
 
   const keyExtractor = (index) => {
     return index.toString();
@@ -42,7 +39,7 @@ export default function TodoListScreen() {
       <View style={styles.content}>
         <FlatList
           style={todoStyles.flatList}
-          data={todos}
+          data={todoStore.todos}
           keyExtractor={(item, index) => keyExtractor(index)}
           renderItem={({ item, index }) => (
             <TodoItem
@@ -66,7 +63,10 @@ export default function TodoListScreen() {
               navigation.navigate("Completed", { data: checkedTodos() });
             }}
           ></Button>
-          <Button title="Добавить" onPress={() => addItem()}></Button>
+          <Button
+            title="Добавить"
+            onPress={() => addItem()}
+          ></Button>
         </View>
         <StatusBar style="auto" />
       </View>
