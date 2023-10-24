@@ -7,31 +7,29 @@ import styles from "../styles/styles";
 import todoStyles from "../styles/todo";
 import todoStore from "../stores/TodoStore";
 import logStore from "../stores/LogStore";
+import { observer } from "mobx-react";
 
-export default function TodoListScreen() {
-  const navigation = useNavigation();
+const TodoListScreen = observer(({ navigation }) => {
   const [text, setText] = useState("");
 
   const addItem = () => {
     todoStore.addItem(text);
-    setText('');
-  }
+    logStore.addLog(`Добавлена задача ${text}`)
+    setText("");
+  };
 
-  const removeItem = (index) => {
-    todoStore.removeItem(index);
-  }
+  const removeItem = (item) => {
+    todoStore.removeItem(item);
+    logStore.addLog(`Удалена задача ${item.text}`)
+  };
 
-  const toggleItem = (index) => {
-    todoStore.toggleItem(index);
-  }
+  const toggleItem = (item) => {
+    todoStore.toggleItem(item);
+    logStore.addLog(`Задача ${item.text} отмечена как ${item.checked ? 'Выполнена' : 'Не выполнена'}`)
+  };
 
   const keyExtractor = (index) => {
     return index.toString();
-  };
-
-  const checkedTodos = () => {
-    const items = [...todos];
-    return items.filter((item) => item.checked);
   };
 
   return (
@@ -44,8 +42,8 @@ export default function TodoListScreen() {
           renderItem={({ item, index }) => (
             <TodoItem
               item={item}
-              removeItem={removeItem}
-              toggleItem={toggleItem}
+              removeItem={() => removeItem(item)}
+              toggleItem={() => toggleItem(item)}
               index={index}
             />
           )}
@@ -57,19 +55,24 @@ export default function TodoListScreen() {
           value={text}
         />
         <View style={styles.actionBar}>
-          <Button
-            title="Выполненные"
+        <Button
+            title="Логи"
             onPress={() => {
-              navigation.navigate("Completed", { data: checkedTodos() });
+              navigation.navigate("Logs", { data: logStore.logs });
             }}
           ></Button>
           <Button
-            title="Добавить"
-            onPress={() => addItem()}
+            title="Выполненные"
+            onPress={() => {
+              navigation.navigate("Completed", { data: todoStore.checkedTodos() });
+            }}
           ></Button>
+          <Button title="Добавить" onPress={() => addItem()}></Button>
         </View>
         <StatusBar style="auto" />
       </View>
     </SafeAreaView>
   );
-}
+});
+
+export default TodoListScreen;

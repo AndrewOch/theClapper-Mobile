@@ -9,6 +9,7 @@ import CheckedTodoListScreen from "./screens/CompletedTodoList";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Button, View, Text } from "react-native";
 import { observer } from "mobx-react-lite";
+import LogListScreen from "./screens/LogList";
 
 const Stack = createNativeStackNavigator();
 
@@ -24,6 +25,7 @@ export const NavigationComponent = () => {
         <Stack.Screen name={"Todo List"} component={TodoListScreen} />
         <Stack.Screen name={"About"} component={AboutScreen} />
         <Stack.Screen name={"Completed"} component={CheckedTodoListScreen} />
+        <Stack.Screen name={"Logs"} component={LogListScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

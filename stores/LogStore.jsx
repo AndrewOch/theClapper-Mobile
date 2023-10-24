@@ -8,7 +8,7 @@ export class LogStore {
   }
 
   addLog = (text) => {
-    this.logList = [...this.logList, text];
+    this.logs = [...this.logs, { text: text}];
   };
 }
 
