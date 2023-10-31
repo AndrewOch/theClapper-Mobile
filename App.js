@@ -12,12 +12,9 @@ import { observer } from "mobx-react-lite";
 import LogListScreen from "./screens/LogList";
 
 const Stack = createNativeStackNavigator();
+import { TabNavigator } from "./navigation/TabNavigator";
 
 const App = () => {
-  return <NavigationComponent />;
-};
-
-export const NavigationComponent = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
