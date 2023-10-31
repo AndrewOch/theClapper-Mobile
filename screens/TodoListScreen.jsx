@@ -5,36 +5,31 @@ import { Button, View, TextInput, FlatList, SafeAreaView } from "react-native";
 import TodoItem from "../components/TodoItem";
 import styles from "../styles/styles";
 import todoStyles from "../styles/todo";
+import todoStore from "../stores/TodoStore";
+import logStore from "../stores/LogStore";
+import { observer } from "mobx-react";
 
-export default function TodoListScreen() {
-  const navigation = useNavigation();
-  const [todos, setTodos] = useState([]);
+const TodoListScreen = observer(({ navigation }) => {
   const [text, setText] = useState("");
 
   const addItem = () => {
-    setTodos([...todos, { text: text, checked: false }]);
+    todoStore.addItem(text);
+    logStore.addLog(`Добавлена задача ${text}`)
     setText("");
   };
 
-  const toggleItem = (index) => {
-    let newTodos = [...todos];
-    newTodos[index].checked = !newTodos[index].checked;
-    setTodos(newTodos);
+  const removeItem = (item) => {
+    todoStore.removeItem(item);
+    logStore.addLog(`Удалена задача ${item.text}`)
   };
 
-  const removeItem = (index) => {
-    let newTodos = [...todos];
-    newTodos.splice(index, 1);
-    setTodos(newTodos);
+  const toggleItem = (item) => {
+    todoStore.toggleItem(item);
+    logStore.addLog(`Задача ${item.text} отмечена как ${item.checked ? 'Выполнена' : 'Не выполнена'}`)
   };
 
   const keyExtractor = (index) => {
     return index.toString();
-  };
-
-  const checkedTodos = () => {
-    const items = [...todos];
-    return items.filter((item) => item.checked);
   };
 
   return (
@@ -42,13 +37,13 @@ export default function TodoListScreen() {
       <View style={styles.content}>
         <FlatList
           style={todoStyles.flatList}
-          data={todos}
+          data={todoStore.todos}
           keyExtractor={(item, index) => keyExtractor(index)}
           renderItem={({ item, index }) => (
             <TodoItem
               item={item}
-              removeItem={removeItem}
-              toggleItem={toggleItem}
+              removeItem={() => removeItem(item)}
+              toggleItem={() => toggleItem(item)}
               index={index}
             />
           )}
@@ -60,10 +55,16 @@ export default function TodoListScreen() {
           value={text}
         />
         <View style={styles.actionBar}>
+        <Button
+            title="Логи"
+            onPress={() => {
+              navigation.navigate("Logs", { data: logStore.logs });
+            }}
+          ></Button>
           <Button
             title="Выполненные"
             onPress={() => {
-              navigation.navigate("Completed", { data: checkedTodos() });
+              navigation.navigate("Completed", { data: todoStore.checkedTodos() });
             }}
           ></Button>
           <Button title="Добавить" onPress={() => addItem()}></Button>
@@ -72,4 +73,6 @@ export default function TodoListScreen() {
       </View>
     </SafeAreaView>
   );
-}
+});
+
+export default TodoListScreen;

@@ -14,3 +14,10 @@ https://github.com/AndrewOch/theClapper-Mobile/assets/38253789/512e21bc-bdff-409
 # Homework 4
 [tabbar.webm](https://github.com/AndrewOch/theClapper-Mobile/assets/38253789/931678a4-611d-494a-953d-f60b0838e756)
 
+# Box task
+<img src="https://github.com/AndrewOch/theClapper-Mobile/assets/38253789/f9d56eb1-1262-47ac-a23b-f9798e8ab88d" width="400">
+
+
+# MobX Todo List
+https://github.com/AndrewOch/theClapper-Mobile/assets/38253789/9a8674d9-6477-40c5-ba0e-ad12707e31ef
+
