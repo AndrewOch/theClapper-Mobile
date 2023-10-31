@@ -17,13 +17,7 @@ import { TabNavigator } from "./navigation/TabNavigator";
 const App = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name={"Home"} tit component={HomeScreen} />
-        <Stack.Screen name={"Todo List"} component={TodoListScreen} />
-        <Stack.Screen name={"About"} component={AboutScreen} />
-        <Stack.Screen name={"Completed"} component={CheckedTodoListScreen} />
-        <Stack.Screen name={"Logs"} component={LogListScreen} />
-      </Stack.Navigator>
+      <TabNavigator />
     </NavigationContainer>
   );
 };

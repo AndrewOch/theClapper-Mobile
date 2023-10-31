@@ -9,9 +9,10 @@ import TodoListScreen from "../screens/TodoListScreen";
 import CheckedTodoListScreen from "../screens/CompletedTodoList";
 import { SettingsScreen } from "../screens/SettingsScreen";
 import { ChatScreen } from "../screens/ChatScreen";
-import { NewsScreen } from "../screens/NewsScreen";
+import { WeatherScreen } from "../screens/WeatherScreen";
 import { Image, Button, Text } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import LogListScreen from "../screens/LogList";
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -30,11 +31,11 @@ export const TabNavigator = () => {
         }}
       />
       <Tab.Screen
-        name="News"
-        component={NewsScreen}
+        name="Weather"
+        component={WeatherScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Feather name="book" color={color} size={size} />
+            <Feather name="cloud" color={color} size={size} />
           ),
         }}
       />
@@ -82,6 +83,7 @@ export const HomeStack = () => {
       <Stack.Screen name={"Todo List"} component={TodoListScreen} />
       <Stack.Screen name={"About"} component={AboutScreen} />
       <Stack.Screen name={"Completed"} component={CheckedTodoListScreen} />
+      <Stack.Screen name={"Logs"} component={LogListScreen} />
     </Stack.Navigator>
   );
 };
